@@ -1,13 +1,8 @@
 class Debenture extends Investimento {
     private String nomeEmpresaEmissora;
 
-    public Debenture(Cliente cliente, double saldo, double taxaJurosAnual, double percentualTributacaoPJ, String nomeEmpresaEmissora) {
+    public Debenture(PessoaJuridica cliente, double saldo, double taxaJurosAnual, double percentualTributacaoPJ, String nomeEmpresaEmissora) {
         super(cliente, saldo, taxaJurosAnual / 12, percentualTributacaoPJ);
-
-        if (!(cliente instanceof PessoaJuridica)) {
-            throw new IllegalArgumentException("Erro: Debênture é exclusivo para Pessoa Jurídica.");
-        }
-
         this.nomeEmpresaEmissora = nomeEmpresaEmissora;
     }
 
@@ -29,7 +24,7 @@ class Debenture extends Investimento {
 
     @Override
     public void simularPassagemDeMes() {
-        super.aplicar(this.getSaldo() * this.calcGanhoMensal());
+        super.aplicar(this.calcGanhoMensal());
     }
 
     // gets e sets

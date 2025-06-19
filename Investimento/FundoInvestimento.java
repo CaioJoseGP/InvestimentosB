@@ -19,16 +19,12 @@ class FundoInvestimento extends Investimento {
             return super.getSaldo();
         }
 
+        //TODO tentar fazer sem for e sem recursiva - estudar formulas
+
         double saldoAnterior = this.calcularSaldoProjetado(numeroMeses - 1);
         double saldoProjetadoLiquido = super.calcSaldoProjetadoBruto(saldoAnterior) - this.calcEncargoTotal(saldoAnterior);
 
         return saldoProjetadoLiquido;
-    }
-
-    @Override
-    public double calcGanhoMensal() {
-        double ganhoMensal = this.getSaldo() * this.getTaxaGanho();
-        return ganhoMensal;
     }
 
     @Override
@@ -48,9 +44,5 @@ class FundoInvestimento extends Investimento {
 
     public String getCnpjGestora() {
         return cnpjGestora;
-    }
-
-    public void setCnpjGestora(String cnpjGestora) {
-        this.cnpjGestora = cnpjGestora;
     }
 }

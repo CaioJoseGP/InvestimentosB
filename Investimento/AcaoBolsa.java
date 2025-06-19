@@ -28,14 +28,8 @@ class AcaoBolsa extends Investimento {
     }
 
     @Override
-    public double calcGanhoMensal() {
-        double ganhoMensal = this.getSaldo() * (1 + this.getTaxaGanho());
-        return ganhoMensal;
-    }
-
-    @Override
     public void simularPassagemDeMes() {
-        super.aplicar(this.getSaldo() * this.calcGanhoMensal());
+        super.aplicar(this.calcGanhoMensal());
         super.resgatar(this.getTaxaEncargo());
     }
 

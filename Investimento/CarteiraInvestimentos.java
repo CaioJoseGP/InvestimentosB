@@ -5,27 +5,42 @@ public class CarteiraInvestimentos {
     private double saldoTotal;
     private ArrayList<Investimento> investimentos;
 
-    public CarteiraInvestimentos(Cliente cliente, ArrayList<Investimento> investimentos) {
+    public CarteiraInvestimentos(Cliente cliente) {
         this.cliente = cliente;
         this.saldoTotal = 0;
-        this.investimentos = new ArrayList<>(investimentos);
+        this.investimentos = new ArrayList<>();
     }
 
     public void adicionarInvestimento(Investimento investimento) {
-        if(this.cliente == investimento.getCliente()) {
+        if(this.cliente.getIdentificadorDocumento().equals(investimento.getCliente().getIdentificadorDocumento())) {
             this.investimentos.add(investimento);
         }
     }
 
-    public double calcularValorTotalInvestido() {
+    public void removerInvestimento(Investimento investimento) {
+        //TODO sobrescrever o método Hash e sla fazer a comparação de conteudo (?)
+        this.investimentos.remove(investimento);
+    }
+
+    private double somarValorInvestimentos() {
         double total = 0;
 
         for(Investimento investimento : investimentos) {
             total += investimento.getSaldo();
         }
 
-        this.saldoTotal = total;
+        return total;
+    }
+
+    public double calcularValorTotalInvestido() {
+        this.saldoTotal = somarValorInvestimentos();
         return saldoTotal;
+    }
+
+    public void renderMensal() {
+        for(Investimento investimento : investimentos) {
+            investimento.simularPassagemDeMes();
+        }
     }
 
     public Cliente getCliente() {
@@ -38,9 +53,5 @@ public class CarteiraInvestimentos {
 
     public ArrayList<Investimento> getInvestimentos() {
         return investimentos;
-    }
-
-    public void setInvestimentos(ArrayList<Investimento> investimentos) {
-        this.investimentos = new ArrayList<>(investimentos);
     }
 }

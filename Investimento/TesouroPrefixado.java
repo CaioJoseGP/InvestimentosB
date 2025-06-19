@@ -1,13 +1,8 @@
 class TesouroPrefixado extends Investimento {
     private String nomeTitulo;
 
-    public TesouroPrefixado(Cliente cliente, double saldo, double taxaJurosAnual, String nomeTitulo) {
+    public TesouroPrefixado(PessoaFisica cliente, double saldo, double taxaJurosAnual, String nomeTitulo) {
         super(cliente, saldo, taxaJurosAnual / 12, 0.15);
-
-        if (!(cliente instanceof PessoaFisica)) {
-            throw new IllegalArgumentException("Erro: Tesouro Prefixado é exclusivo para Pessoa Física.");
-        }
-
         this.nomeTitulo = nomeTitulo;
     }
 
@@ -29,7 +24,7 @@ class TesouroPrefixado extends Investimento {
 
     @Override
     public void simularPassagemDeMes() {
-        super.aplicar(this.getSaldo() * this.calcGanhoMensal());
+        super.aplicar(this.calcGanhoMensal());
     }
 
     // gets e sets

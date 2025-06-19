@@ -32,7 +32,7 @@ abstract class Investimento {
     }
 
     public double calcGanhoMensal() {
-        double ganhoMensal = (1 + this.taxaGanho);
+        double ganhoMensal = this.saldo * this.taxaGanho;
         return ganhoMensal;
     }
 
@@ -52,15 +52,7 @@ abstract class Investimento {
         return taxaGanho;
     }
 
-    public void setTaxaGanho(double taxaGanho) {
-        this.taxaGanho = taxaGanho;
-    }
-
     public double getTaxaEncargo() {
         return taxaEncargo;
-    }
-
-    public void setTaxaEncargo(double taxaEncargo) {
-        this.taxaEncargo = taxaEncargo;
     }
 }
